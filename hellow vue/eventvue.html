@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js">
+<!--<![endif]-->
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title></title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="">
+
+    <style>
+        * {
+            margin-top: 1em;
+            background-color: white;
+            color: blue;
+        }
+
+        div {
+            width: 50%;
+            background-color: transparent;
+            position: relative;
+        }
+    </style>
+
+    <!-- 开发环境版本，包含了有帮助的命令行警告 -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+
+<body>
+    <!--[if lt IE 7]>
+            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+
+    <script src="" async defer></script>
+
+    <div id="app-1">
+        <button v-on:click="counter ++">Add 1</button>
+        <p>The button above has been clicked {{ counter }} times.</p>
+    </div>
+
+    <div id="app-2">
+        <button v-on:click="greet()">greet</button>
+    </div>
+
+    <div id="app-3">
+        <button v-on:click="say('hi')">Say hi</button>
+        <button v-on:click="say('what')">Say what</button>
+        <button v-on:click="warn('Form cannot be submitted yet.', $event)">
+            访问原始的 DOM 事件
+        </button>
+        <button v-on:click.once="clickOnce('Me Just click once')">Just click once</button>
+        <input v-on:keyup.delete="keyDelete">
+    </div>
+
+    <div id="app-4">
+        <h3>表单输入绑定</h3>
+        <input v-model="message" type="text" placeholder="Enter message" />
+        <p>Message is: {{ message }}</p>
+    </div>
+
+    <div id="app-5">
+        <!-- 单个复选框，绑定到布尔值 -->
+        <span>单个复选框，绑定到布尔值</span><br>
+        <input v-model="checked" type="checkbox" id="checkbox-1" /><label for="checkbox-1">{{ checked }}</label>
+        <p>----------------------------------</p>
+
+        <!-- 多个复选框，绑定到同一个数组 -->
+        <span>多个复选框，绑定到同一个数组</span><br>
+        <input v-model="checkedNames" type="checkbox" id="jack" value="Jack" /><label for="jack">Jack</label>
+        <input v-model="checkedNames" type="checkbox" id="john" value="John" /><label for="john">John</label>
+        <input v-model="checkedNames" type="checkbox" id="mike" value="Mike" /><label for="mike">Mike</label>
+        <input v-model="checkedNames" type="checkbox" id="bob" value="Bob" /><label for="bob">Bob</label>
+        <input v-model="checkedNames" type="checkbox" id="tracy" value="Tracy" /><label for="tracy">Tracy</label>
+        <input v-model="checkedNames" type="checkbox" id="helen" value="Helen" /><label for="helen">Helen</label>
+        <br>
+        <span>Checked names: {{ checkedNames }}</span>
+        <p>----------------------------------</p>
+
+        <span>单选按钮</span><br>
+        <input v-model="picked" type="radio" id="one" value="1" /><label for="one">One</label>
+        <br>
+        <input v-model="picked" type="radio" id="two" value="2" /><label for="two">Two</label>
+        <br>
+        <span>Picked: {{ picked }}</span>
+        <p>----------------------------------</p>
+
+        <span>v-for 渲染的动态选项</span><br>
+        <select v-model="selected">
+            <option v-for="(item, index) in options" v-bind:key="index" v-bind:value="item.value">
+                {{ item.text }} & {{ item.value }} & {{ index }}
+            </option>
+        </select>
+    </div>
+</body>
+<script>
+    var app1 = new Vue({
+        el: '#app-1',
+        data: {
+            counter: 0
+        }
+    })
+
+    var app2 = new Vue({
+        el: '#app-2',
+        data: {
+        },
+        methods: {
+            greet: function () {
+                alert("hello !");
+                if (event) {
+                    alert(event.target.tagName)
+                }
+            }
+        }
+    })
+
+    var app3 = new Vue({
+        el: '#app-3',
+        data: {
+        },
+        methods: {
+            say: function (message) {
+                alert(message);
+            },
+            warn: function (message, event) {
+                // 现在我们可以访问原生事件对象
+                if (event)
+                    event.preventDefault()
+                alert(message + event)
+            },
+            clickOnce: function (message) {
+                alert(message);
+            },
+            keyDelete: function () {
+                alert("keyup: delete");
+            }
+        }
+    })
+
+    var app4 = new Vue({
+        el: '#app-4',
+        data: {
+            message: ''
+        }
+    })
+
+    var app5 = new Vue({
+        el: '#app-5',
+        data: {
+            checked: true,
+            checkedNames: [],
+            picked: '',
+            selected: 'A4',
+            options: [
+                { text: "1", value: 'A1' },
+                { text: "2", value: 'A2' },
+                { text: "3", value: 'A3' },
+                { text: "4", value: 'A4' }
+            ]
+        }
+    })
+</script>
+
+</html>

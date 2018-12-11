@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js">
+<!--<![endif]-->
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title></title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="">
+
+    <style>
+        * {
+            margin-top: 1em;
+            background-color: white;
+            color: blue;
+        }
+
+        div {
+            width: 50%;
+            background-color: transparent;
+            position: relative;
+        }
+    </style>
+
+    <!-- 开发环境版本，包含了有帮助的命令行警告 -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+
+<body>
+    <!--[if lt IE 7]>
+            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+
+    <script src="" async defer></script>
+
+    <div id="app-1">
+        <button-counter v-on:click="count ++"></button-counter>
+        <button-counter v-on:click="count ++"></button-counter>
+        <button-counter v-on:click="count ++"></button-counter>
+        <button-counter v-on:click="count ++"></button-counter>
+    </div>
+
+    <div id="app-2">
+        <blog-post v-for="(item, index) in posts" v-bind:key="index" v-bind:post="item"></blog-post>
+    </div>
+</body>
+<script>
+    Vue.component('blog-post', {
+        // Prop 是你可以在组件上注册的一些自定义特性(数据)
+        props: ['post'],
+        template: '<div><h3>{{ post.title }}</h3><div v-html="post.content"></div></div>'
+    });
+    var app2 = new Vue({
+        el: '#app-2',
+        data: {
+            posts: [
+                { id: 1, title: 'My journey with Vue1', content: 'My journey with Vue1My journey with Vue1' },
+                { id: 2, title: 'My journey with Vue2', content: 'My journey with Vue2My journey with Vue2' },
+                { id: 3, title: 'My journey with Vue3', content: 'My journey with Vue3My journey with Vue3' },
+                { id: 4, title: 'My journey with Vue4', content: 'My journey with Vue4My journey with Vue4' }
+            ]
+        }
+    })
+
+    Vue.component('button-counter', {
+        // 组件里必须用函数创建data数据对象
+        data: function () {
+            return {
+                count: 0
+            }
+        },
+        template: '<button v-on:click="count++">You clicked me {{ count }} times.</button>'
+    });
+    var app1 = new Vue({
+        el: '#app-1'
+    })
+</script>
+
+</html>

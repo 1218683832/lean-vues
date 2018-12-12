@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js">
+<!--<![endif]-->
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title></title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="">
+
+    <style>
+        * {
+            margin-top: 1em;
+            background-color: white;
+            color: blue;
+        }
+
+        div {
+            width: 50%;
+            background-color: transparent;
+            position: relative;
+        }
+
+        /* 可以设置不同的进入和离开动画 */
+        /* 设置持续时间和动画函数 */
+        .fade-enter-active,
+        .fade-leave-active {
+            transition: opacity 2s
+        }
+
+        .fade-enter,
+        .fade-leave-to
+
+        /* .fade-leave-active below version 2.1.8 */
+            {
+            opacity: 0;
+        }
+
+        .slide-fade-enter-active {
+            transition: all 0.3s ease;
+        }
+
+        .slide-fade-leave-active {
+            transition: all .8s cubic-bezier(1.0, 0.5, 0.8, 1.0);
+        }
+
+        .slide-fade-enter,
+        .slide-fade-leave-to {
+            transform: translateX(15px);
+            opacity: 0;
+        }
+
+        .bounce-enter-active {
+            animation: bounce-in .5s;
+        }
+
+        .bounce-leave-active {
+            animation: bounce-in .5s reverse;
+        }
+
+        @keyframes bounce-in {
+            0% {
+                transform: scale(0);
+            }
+
+            50% {
+                transform: scale(1.5);
+            }
+
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        #app-4{
+            position: relative;
+        }
+
+        #app-4>button{
+            position: absolute;
+        }
+
+        .no-mode-fade-enter-active,
+        .no-mode-fade-leave-active {
+            transition: all 1s;
+        }
+
+        .no-mode-fade-enter,
+        .no-mode-fade-leave-active {
+            opacity: 0
+        }
+    </style>
+
+    <!-- 开发环境版本，包含了有帮助的命令行警告 -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+
+<body>
+    <!--[if lt IE 7]>
+            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+
+    <script src="" async defer></script>
+
+    <!-- Vue: CSS过渡 -->
+    <div id="app-1">
+        <button @click="show = !show">Toggle-CSS过渡</button>
+        <transition name="fade" mode="">
+            <p v-show="show">hello</p>
+        </transition>
+    </div>
+    <script>
+        var app1 = new Vue({
+            el: '#app-1',
+            data: {
+                show: true
+            }
+        })
+    </script>
+
+    <!-- Vue: CSS过渡 -->
+    <div id="app-2">
+        <button @click="show = !show">Toggle render-CSS过渡</button>
+        <transition name="slide-fade">
+            <p v-if="show">hello</p>
+        </transition>
+    </div>
+    <script>
+        var app2 = new Vue({
+            el: '#app-2',
+            data: {
+                show: true
+            }
+        })
+    </script>
+
+    <!-- Vue: CSS动画 -->
+    <div id="app-3">
+        <button @click="show = !show">Toggle-CSS动画</button>
+        <transition name="bounce">
+            <p v-if="show">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris facilisis enim libero, at
+                lacinia diam fermentum id. Pellentesque habitant morbi tristique senectus et netus.</p>
+        </transition>
+    </div>
+    <script>
+        var app3 = new Vue({
+            el: '#app-3',
+            data: {
+                show: true
+            }
+        })
+    </script>
+
+    <div id="app-4">
+        <transition name="no-mode-fade" mode="">
+            <button v-if="on" key="on" @click="on = false">on</button>
+            <button v-else="" key="off" @click="on = true">off</button>
+        </transition>
+    </div>
+    <script>
+        var app4 = new Vue({
+            el: '#app-4',
+            data: {
+                on: true
+            }
+        })
+    </script>
+</body>
+
+</html>
